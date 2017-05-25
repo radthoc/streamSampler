@@ -1,0 +1,7 @@
+parameters:
+    #parameter_name: value
+
+services:
+
+    app.stream.sample.service:
+        class: AppBundle\Service\StreamSamplerService
