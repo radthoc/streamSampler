@@ -2,6 +2,7 @@
 
 namespace AppBundle\Service;
 
-interface StreamSamplerInterface {
+interface StreamSamplerInterface
+{
     public function getSample($stream, $sampleSize);
 }
