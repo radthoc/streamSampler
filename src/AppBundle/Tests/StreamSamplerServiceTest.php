@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Tests\Util;
+namespace AppBundle\Tests;
 
 use AppBundle\Service\StreamSamplerService;
 use PHPUnit\Framework\TestCase;
