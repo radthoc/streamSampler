@@ -8,6 +8,7 @@ namespace AppBundle\Service;
  */
 class StreamSamplerService implements StreamSamplerInterface
 {
+    const LOWER_LIMIT = 0;
 
     /**
      * @param string $stream
@@ -20,7 +21,7 @@ class StreamSamplerService implements StreamSamplerInterface
         $max = strlen($stream) - 1;
 
         for ($count = 0; $count < $sampleSize; $count++) {
-            $position = random_int($count, $max);
+            $position = random_int(self::LOWER_LIMIT, $max);
             $sample .= $stream[$position];
         }
 
