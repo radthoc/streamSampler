@@ -2,7 +2,7 @@ parameters:
     #parameter_name: value
 
 services:
-    app.stream.sample.service:
+    app.stream.sampler.service:
         class: AppBundle\Service\StreamSamplerService
 
     app.random.string.generator:

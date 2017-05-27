@@ -21,8 +21,8 @@ class StringGeneratorTest extends TestCase
 
     public function testStringGeneratedSize()
     {
-        $length = 110;
+        $length = 80;
 
-        $this->assertEquals($length, strlen($this->stringGenerator->getRandomString($length)));
+        $this->assertEquals($length * 2, strlen($this->stringGenerator->getRandomString($length)));
     }
 }

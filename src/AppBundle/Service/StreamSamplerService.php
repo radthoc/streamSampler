@@ -17,9 +17,11 @@ class StreamSamplerService implements StreamSamplerInterface
     public function getSample($stream, $sampleSize)
     {
         $sample = '';
+        $max = strlen($stream) - 1;
 
         for ($count = 0; $count < $sampleSize; $count++) {
-            $sample .= $stream[\random_int(0, strlen($stream))];
+            $position = random_int($count, $max);
+            $sample .= $stream[$position];
         }
 
         return $sample;
