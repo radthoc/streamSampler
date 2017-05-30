@@ -3,7 +3,7 @@ StreamSampler
 
 ## Overview
 
-CLI command that Receives a sample size and and optional stream, in order to generate a sample with thet received size.
+CLI command that Receives a sample size and and optional stream and generates a sample with the required size.
 
 ## Usage
 
