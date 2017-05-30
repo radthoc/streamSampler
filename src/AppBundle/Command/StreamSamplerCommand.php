@@ -51,9 +51,9 @@ class StreamSamplerCommand extends ContainerAwareCommand
                 }
 
                 $output->writeln(
-                    '<info>The sample is ' .
+                    '<info>[The sample is ' .
                     $sample .
-                    ' </info>'
+                    ']</info>'
                 );
             } catch (\Exception $e) {
                 $output->writeln('<error>Error: ' . $e->getMessage() . '</error>');

@@ -42,12 +42,16 @@ class StreamSamplerService implements StreamSamplerInterface
         $file = self::FILE_PATH .
             self::FILE_NAME;
 
-        $sampleSizePerChunk = $this->getSampleSizePerChunk($file);
+        $sampleSizePerChunk = $this->getSampleSizePerChunk($file, $sampleSize);
 
         $fileHandle = @fopen($file, "r");
 
         if ($fileHandle) {
             while (($streamChunk = fgets($fileHandle, self::STREAMING_CHUNKS_LENGTH)) !== false || strlen($sample) < $sampleSize) {
+                if (strlen($streamChunk) < self::STREAMING_CHUNKS_LENGTH - 1) {
+                    $sampleSizePerChunk = $sampleSize - strlen($sample);
+                }
+
                 $sample .= $this->getSample($streamChunk, $sampleSizePerChunk);
             }
 
@@ -65,8 +69,8 @@ class StreamSamplerService implements StreamSamplerInterface
      * @param $file
      * @return integer
      */
-    private function getSampleSizePerChunk($file)
+    private function getSampleSizePerChunk($file, $sampleSize)
     {
-        return intval(filesize($file) / self::STREAMING_CHUNKS_LENGTH);
+        return intval(($sampleSize * self::STREAMING_CHUNKS_LENGTH) / filesize($file));
     }
 }
