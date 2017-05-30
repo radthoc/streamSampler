@@ -25,4 +25,6 @@ cat lorem.txt | perl lib/streamsampler.pl 5
 
 ## TODO:
 
-Refactor the Perl script to validate the size of the stream in order to write a file only if its too large.  If not then send the stream to the stream-sampler command as it comes.
+* Refactor the perl script to validate the size of the stream and be able to either use a streaming file for large inputs or send the stream directly to the sampler command.
+* Separate the sample generation from the file reading.
+* Implement a functional test for the symfony command.
