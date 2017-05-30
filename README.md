@@ -25,4 +25,4 @@ echo "werlkmklmsflsmflsmflmlasf" | perl lib/streamsampler.pl 5
 
 ## TODO:
 
-Refactor the Perl script to validate size of the stream in order to write a file only if its too large.  If not then send the stream to the stream-sampler command as it comes.
+Refactor the Perl script to validate the size of the stream in order to write a file only if its too large.  If not then send the stream to the stream-sampler command as it comes.
