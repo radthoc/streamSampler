@@ -6,9 +6,21 @@ if (-t STDIN || not defined $ARGV[0]) {
 }
 
 my $length;
-my $piped_value;
+my $line;
 
 $length = $ARGV[0];
-$piped_value = <STDIN>;
 
-exec("php app/console app:stream-sampler $length $piped_value");
+open(my $file_handler, '>', 'web/data/files/stream.txt') or die "Error: Unable to create stream file";
+
+foreach $line ( <STDIN> ) {
+    chomp( $line );
+    print $file_handler $line;
+}
+
+close $file_handler;
+
+exec("php app/console app:stream-sampler $length file");
+
+#TODO: Refactor to validate size of stream in order to use a file only if its too large,
+# and if not send the stream to the stream-sampler command
+# exec("php app/console app:stream-sampler $length $stream");

@@ -18,35 +18,41 @@ class StreamSamplerCommand extends ContainerAwareCommand
         $this
             ->setName('app:stream-sampler')
             ->setDescription('Generate a sample from a stream')
-            ->addArgument('length', InputArgument::REQUIRED, 'Length of the sample?')
-            ->addArgument('stream', InputArgument::OPTIONAL, 'Stream from which to extract the sample?')
+            ->addArgument('length', InputArgument::REQUIRED, 'Length of the sample? (int)')
+            ->addArgument('stream', InputArgument::OPTIONAL, 'Stream from which to extract the sample or stream source? (string)')
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $length = $input->getArgument('length');
+        $stream = $input->getArgument('stream');
+
         if ($length > 0) {
-
-            $stream = $input->getArgument('stream');
-            if (empty($stream)) {
-                $stream = $this->getRandomString($length);
-            }
-
             $output->writeln(
                 '<comment>Generates a random sample ' .
                 $length .
                 ' characters long from a given stream</comment>'
             );
 
+            /** @var StreamSamplerService StreamSamplerService */
+            $streamSamplerService = $this->getContainer()
+                ->get('app.stream.sampler.service');
+
             try {
-                /** @var StreamSamplerService StreamSamplerService */
-                $streamSamplerService = $this->getContainer()
-                    ->get('app.stream.sampler.service');
+                if ($stream == 'file') {
+                    $sample = $streamSamplerService->getSampleFromFile($length);
+                } else {
+                    if (empty($stream)) {
+                        $stream = $this->getRandomString($length);
+                    }
+
+                    $sample = $streamSamplerService->getSample($stream, $length);
+                }
 
                 $output->writeln(
                     '<info>The sample is ' .
-                    $streamSamplerService->getSample($stream, $length) .
+                    $sample .
                     ' </info>'
                 );
             } catch (\Exception $e) {
