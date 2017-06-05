@@ -20,7 +20,7 @@ If no value is given, a stream will be generated randomly.
 
 In order to take the stream from any other source, just run your command and pipe the result to the streamsampler.pl script in the lib folder:
 ```perl
-cat lorem.txt | perl lib/streamsampler.pl 5
+cat lorem.txt | perl bin/streamsampler.pl 5
 ```
 
 ## TODO:
